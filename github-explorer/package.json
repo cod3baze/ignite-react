@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
     "start": "webpack"
   },
   "keywords": [],
@@ -20,6 +21,7 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "7.31.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
