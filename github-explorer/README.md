@@ -34,3 +34,11 @@ module: {
   ];
 }
 ```
+
+```js
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public", "index.html"),
+    }), // coloca o código gerado no arquivo do *template*
+  ],
+```
