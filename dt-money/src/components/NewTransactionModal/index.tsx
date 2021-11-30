@@ -5,7 +5,6 @@ import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import { useContext, useState } from "react";
-import { api } from "../../services/api";
 import { TransactionsContext } from "../../TransactionsContext";
 
 Modal.setAppElement("#root");
