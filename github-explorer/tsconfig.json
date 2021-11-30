@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "DOM.Iterable", "esnext"], // add tipagem da DOM
+    "allowJs": true, // permite arquivos JS
+    "jsx": "react-jsx", // permite HTML dentro do JS
+    "noEmit": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true, // permite importar arquivos JSON
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"] // onde o código TS está localizado
+}

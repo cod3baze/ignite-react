@@ -42,3 +42,41 @@ module: {
     }), // coloca o código gerado no arquivo do *template*
   ],
 ```
+
+## adicionando TS
+
+> typed code
+
+```js
+// babel.config.js
+  presets: [
+    "@babel/preset-env",
+    "@babel/preset-typescript", // vai traduzir os códigos TS
+    [
+      "@babel/preset-react",
+      {
+        runtime: "automatic",
+      },
+    ],
+  ],
+
+// webpack.config.js
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
+
+  rules: [
+      {
+        test: /\.(j|t)sx$/, // vai adicionar as regras nos arquivos *.ts* e *.js*
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            plugins: [
+              isDevelopment && require.resolve("react-refresh/babel"),
+            ].filter(Boolean),
+          },
+        },
+      },
+    ],
+```
