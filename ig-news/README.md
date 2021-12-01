@@ -27,3 +27,16 @@ ex: Blog: os posts são criados através do CMS
 
 - SSG: Static Site Generation.
   - mesmo processo que o SSR. porém vai manter uma cópia do HTML estático em cache, e não vai recriar a página de novo a cada acesso.
+
+### API routes
+
+- server em node, pode fazer requisições no DB.
+- usuário não tem acesso/debug.
+- Serverless: quando hosted, não fica um server esperando as request, o server só liga quando a rota é chamada.
+- as rotas são colocadas dentro da pasta: `src/api/**`.
+
+### Auth
+
+- JWT (storage)
+- Next Auth (independe de backend): fazer login simples, login com Social...
+- Authentication as a service: Cognito, Auth0
