@@ -47,3 +47,15 @@ ex: Blog: os posts são criados através do CMS
 ### DB
 
 faunaDB: lida bem com Serverless através da conexão que é feita em protocolo HTTP.
+
+- reconhece o campo pelo índex
+
+```ts
+// condicional
+q.If(
+  // se nao existir, cria um novo, senão pega os dados
+  q.Not(q.Exists(q.Match(q.Index("user_by_email"), q.Casefold(email)))),
+  q.Create(q.Collection("users"), { data: { email } }),
+  q.Get(q.Match(q.Index("user_by_email"), q.Casefold(email)))
+);
+```
