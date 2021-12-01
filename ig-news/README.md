@@ -19,6 +19,30 @@ ex: Blog: os posts são criados através do CMS
 
 - plataforma de pagamento, permite usuários fazer pagamentos com cartões de credit principalmente.
 
+```js
+// cria o usuário no stripe
+const stripeCustomer = await stripe.customers.create({
+  email: session.user.email,
+});
+
+const checkoutSession = await stripe.checkout.sessions.create({
+  customer: stripeCustomer.id, // usuário fazendo a compra
+  payment_method_types: ["card"],
+  billing_address_collection: "required",
+  line_items: [
+    // produtos sendo adquiridos
+    {
+      price: "price_1K1jEhFUIBq7a12y00ihXAVy",
+      quantity: 1,
+    },
+  ],
+  mode: "subscription", // forma de cobrança: mensalmente...
+  allow_promotion_codes: true,
+  success_url: process.env.STRIPE_SUCCESS_URL,
+  cancel_url: process.env.STRIPE_CANCEL_URL,
+});
+```
+
 ### SSR & SSG
 
 - SSR: renderizado á partir do servidor.
