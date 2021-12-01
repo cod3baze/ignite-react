@@ -40,3 +40,10 @@ ex: Blog: os posts são criados através do CMS
 - JWT (storage)
 - Next Auth (independe de backend): fazer login simples, login com Social...
 - Authentication as a service: Cognito, Auth0
+
+- nextAuth
+  - callbacks: funções que são executadas de forma automática, assim que acontece alguma ação. ex: (signIn)
+
+### DB
+
+faunaDB: lida bem com Serverless através da conexão que é feita em protocolo HTTP.
