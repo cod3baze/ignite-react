@@ -14,3 +14,7 @@ ex: Blog: os posts são criados através do CMS
 - é chamado sempre que altera uma rota
 
 - \_document.tsx: é chamado somente 1 única vez
+
+### Stripe
+
+- plataforma de pagamento, permite usuários fazer pagamentos com cartões de credit principalmente.
