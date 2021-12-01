@@ -83,3 +83,12 @@ q.If(
   q.Get(q.Match(q.Index("user_by_email"), q.Casefold(email)))
 );
 ```
+
+### webhook
+
+quando uma aplicação 3° avisa a nossa aplicação de determinado evento.
+ex: cartão recusado
+
+- stipe envia os events em forma de Streams-chunks (pedaços)
+
+- **.\stripe.exe listen --forward-to localhost:3000/api/webhooks**: vai passar todos os webhooks para determinada rota
