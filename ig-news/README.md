@@ -18,3 +18,12 @@ ex: Blog: os posts são criados através do CMS
 ### Stripe
 
 - plataforma de pagamento, permite usuários fazer pagamentos com cartões de credit principalmente.
+
+### SSR & SSG
+
+- SSR: renderizado á partir do servidor.
+
+  - a página vai ser construída no servidor e depois entregue ao client(navegador)
+
+- SSG: Static Site Generation.
+  - mesmo processo que o SSR. porém vai manter uma cópia do HTML estático em cache, e não vai recriar a página de novo a cada acesso.
