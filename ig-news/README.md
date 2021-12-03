@@ -1,6 +1,6 @@
 # ig.news
 
-### Prismic CMS
+## Prismic CMS
 
 > painel de administração pra poder cadastrar infos, e servir esses dados através de uma API.
 
