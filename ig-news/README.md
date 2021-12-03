@@ -92,3 +92,31 @@ ex: cartão recusado
 - stipe envia os events em forma de Streams-chunks (pedaços)
 
 - **.\stripe.exe listen --forward-to localhost:3000/api/webhooks**: vai passar todos os webhooks para determinada rota
+
+### JAMStack
+
+- aplicações que dependem menos de um backend.
+
+JavaScript: funcionamento da aplicação
+API: api de terceiros. ex: FAuna, stripe, CMS..
+Markup: HTML, estrutura da página
+
+- CMS
+  Content Management System
+
+- painel de administração de conteúdo. ex: criar posts.
+
+ex:
+
+- Wordpress
+- Drupal
+
+headless CMS: painel de ADM onde todos os dados são servidos através de uma API...
+
+- Strapi (muitos tipos)
+- Ghost (Blog)
+- Keystone
+
+- GraphCMS
+- PrismicCMS
+- Contentful
