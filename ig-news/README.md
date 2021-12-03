@@ -50,7 +50,41 @@ const checkoutSession = await stripe.checkout.sessions.create({
   - a página vai ser construída no servidor e depois entregue ao client(navegador)
 
 - SSG: Static Site Generation.
+
   - mesmo processo que o SSR. porém vai manter uma cópia do HTML estático em cache, e não vai recriar a página de novo a cada acesso.
+
+  - getStaticPaths: necessário quando a **route** é **dynamic**
+
+    - permite gerar as páginas estáticas durante a _build_
+    - permite gerar a página estática no _primeiro acesso_
+    - permite gerar a página estática em _partes das rotas_
+
+  - ex:
+
+  ```ts
+  export const getStaticPaths = () => {
+    return {
+      paths: [
+        {
+          params: {
+            slug: "uid-da-rota", // gera um estático para essa slug/página
+          },
+        },
+      ],
+      fallback: "blocking",
+    };
+  };
+
+  return {
+    paths: [], // gera estático apenas quando acessada
+    fallback: "blocking".
+    /**
+     * true: se não estiver gerado, a página carrega nom lado do client.
+     false: se não foi gerado ainda vai retornar 404
+     blocking: se não foi gerado ainda vai carregar na camada do Next: *ServerSideRendering*
+    */
+  }
+  ```
 
 ### API routes
 
