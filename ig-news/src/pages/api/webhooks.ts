@@ -21,7 +21,12 @@ export const config = {
 };
 
 // Array sem duplicate
-const relevantEvents = new Set(["checkout.session.completed"]);
+const relevantEvents = new Set([
+  "checkout.session.completed",
+  // "customer.subscription.created",
+  "customer.subscription.updated",
+  "customer.subscription.deleted",
+]);
 
 const webhooks = async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method === "POST") {
@@ -46,13 +51,29 @@ const webhooks = async (request: NextApiRequest, response: NextApiResponse) => {
     if (relevantEvents.has(type)) {
       try {
         switch (type) {
+          case "customer.subscription.updated":
+          case "customer.subscription.deleted":
+            const subscription = event.data.object as Stripe.Subscription;
+
+            /**
+             * só vai criar no DB caso o type seja "customer.subscription.created"
+             */
+            await saveSubscription(
+              subscription.id,
+              subscription.customer.toString(),
+              false
+              // type === "customer.subscription.created"
+            );
+            break;
+
           case "checkout.session.completed":
             const checkoutSession = event.data
               .object as Stripe.Checkout.Session;
 
             await saveSubscription(
               checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString()
+              checkoutSession.customer.toString(),
+              true
             );
             break;
 
