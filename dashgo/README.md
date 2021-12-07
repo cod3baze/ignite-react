@@ -39,6 +39,9 @@ export const theme = extendTheme({
 */
 size="lg" // tamanhos pre definidos
 
-// ex: serve para quando for criar uma pilha de elementos para dar espaçamento entre eles
-- Stack
+// Serve para quando for criar uma pilha de elementos para dar espaçamento entre eles
+<Stack spacing="4">
+  <Input />
+  <Input />
+</Stack>
 ```
