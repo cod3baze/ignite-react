@@ -46,6 +46,36 @@ size="lg" // tamanhos pre definidos
 </Stack>
 ```
 
+- Breakpoint
+
+  - permite que os components sejam renderizado de acordo com o tamanho de tela
+
+  - ex: aplica os tamanhos de acordo com a sequência de breakpoints
+
+  ```ts
+    /**
+     * sm: "30em", -> +mobile
+     * md: "480em", -> +tablet
+     * lg: "62em", -> +desktop
+     * xl: "80em",
+     * 2xl: "80em",
+    */
+
+    // quando a tela chegar no tamanho **md** vai aplicar **3xl**
+    // 2xl a partir disso: 3xl
+    fontSize={["2xl", "3xl"]}
+  ```
+
+- useBreakpointValue: criar um valor baseado no tamanho da tela.
+
+  - ex: retorna a cor **blue** se a tela estiver em **md**
+
+  ```ts
+  const textColor = useBreakpointValue({ base: "red", md: "blue" });
+
+  return <Text color={textColor}>eliasallex</Text>;
+  ```
+
 ### NextJS
 
 - fax processo de SSR nas rotas
