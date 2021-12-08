@@ -1,5 +1,7 @@
-import { Box, Stack, Text, Link, Icon } from "@chakra-ui/react";
 import React from "react";
+
+import { Box, Stack, Text, Link, Icon } from "@chakra-ui/react";
+
 import {
   RiDashboardLine,
   RiContactsLine,
@@ -16,7 +18,7 @@ export function Sidebar() {
             Geral
           </Text>
           <Stack spacing="4" mt="8" align="stretch">
-            <Link display="flex" align="center">
+            <Link href="/users" to="/users" display="flex" align="center">
               <Icon as={RiDashboardLine} fontSize="20" />
               <Text ml="4" fontSize="medium">
                 Dashboard
