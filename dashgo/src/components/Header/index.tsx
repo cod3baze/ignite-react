@@ -28,12 +28,16 @@ export function Header() {
     >
       {!isWideVersion && (
         <IconButton
-          aria-label="wef"
-          onClick={() => {}}
-          fontSize={"24"}
+          aria-label="Open navigation"
           icon={<Icon as={RiMenuLine} />}
+          fontSize="24"
+          variant="unstyled"
+          onClick={onOpen}
+          mt="2"
+          mr="2"
         />
       )}
+
       <Logo />
 
       {isWideVersion && <SearchBox />}

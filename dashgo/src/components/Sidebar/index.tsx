@@ -12,8 +12,11 @@ import {
 } from "@chakra-ui/react";
 
 import { SidebarNav } from "./SidebarNav";
+import { useSidebarDrawer } from "../../contexts/SidebarDrawerContext";
 
 export function Sidebar() {
+  const { isOpen, onClose } = useSidebarDrawer();
+
   const isDrawerSidebar = useBreakpointValue({
     base: true,
     lg: false,
@@ -21,10 +24,10 @@ export function Sidebar() {
 
   if (isDrawerSidebar) {
     return (
-      <Drawer isOpen={true} placement="left" onClose={() => {}}>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay>
           <DrawerContent bg="gray.800" p="4">
-            <DrawerCloseButton mt="6"></DrawerCloseButton>
+            <DrawerCloseButton mt="6" />
             <DrawerHeader>Navegação</DrawerHeader>
 
             <DrawerBody>
