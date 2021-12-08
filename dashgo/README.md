@@ -45,3 +45,18 @@ size="lg" // tamanhos pre definidos
   <Input />
 </Stack>
 ```
+
+### NextJS
+
+- fax processo de SSR nas rotas
+
+- dynamic imports: evita que algo carrege antes do browser carregar.
+
+- ex:_apenas carrega depois de passar pelo servidor do next_
+
+```ts
+// lazy loading
+const Chart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
+```
