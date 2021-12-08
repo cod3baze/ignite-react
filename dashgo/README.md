@@ -50,7 +50,7 @@ size="lg" // tamanhos pre definidos
 
 - fax processo de SSR nas rotas
 
-- dynamic imports: evita que algo carrege antes do browser carregar.
+- dynamic imports: evita que algo carregue antes do browser carregar.
 
 - ex:_apenas carrega depois de passar pelo servidor do next_
 
