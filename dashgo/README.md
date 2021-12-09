@@ -90,3 +90,22 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 ```
+
+### Forms data
+
+- controlled components: controlar os inputs através do estado
+- uncontrolled components: formas de acessar o valor do input apenas no momento quando utilizar ele.
+- ex: utilizando **Refs**
+
+  ```ts
+  const searchInputRef = useRef<HTMLInputElement>(null)
+
+  /*
+    * Quando o *elemento input* for construído em tela vai passar a *ref* dela para a variável *searchInputRef*
+  */
+  <Input ref={searchInputRef} />
+
+  // acessa o valor da *searchInputRef*
+  // programação Imperativa: diz exatamente o que fazer
+  console.log(searchInputRef.current.value)
+  ```
