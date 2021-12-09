@@ -109,3 +109,25 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   // programação Imperativa: diz exatamente o que fazer
   console.log(searchInputRef.current.value)
   ```
+
+- **Refs**: usado para acessar um component de forma imperativa.
+
+```ts
+/*
+ * só recebe o segundo argumento *Ref* por causa do *forwardRef*.
+ */
+const InputBase = ({ id, ...rest }: Interface, ref) => {
+  return <div {...rest} ref={ref} />;
+};
+
+/**
+// repassa a ref para o component filho.
+
+ * vai repassar a *Ref* recebida como o segundo argumento do component filho (InputBase).
+ *
+ * essa *ref* vai ser colocada no component que vai ser controlada imperativamente.
+ */
+const FormInput = forwardRef(InputBase);
+
+<FormInput ref={register} />;
+```

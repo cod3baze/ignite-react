@@ -1,17 +1,21 @@
+import React, { forwardRef, ForwardRefRenderFunction } from "react";
+
 import {
   FormControl,
   FormLabel,
   Input as ChakraInput,
   InputProps as ChakraInputProps,
 } from "@chakra-ui/react";
-import React from "react";
 
 interface IInputProps extends ChakraInputProps {
   name: string;
   label?: string;
 }
 
-export function Input({ name, label, ...rest }: IInputProps) {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, IInputProps> = (
+  { name, label, ...rest },
+  ref
+) => {
   return (
     <FormControl>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
@@ -26,8 +30,15 @@ export function Input({ name, label, ...rest }: IInputProps) {
           bgColor: "gray.900",
         }}
         size="lg"
+        ref={ref}
         {...rest}
       />
     </FormControl>
   );
-}
+};
+/**
+ * vai repassar a *Ref* recebida como o segundo argumento do component filho (InputBase).
+ *
+ * essa *ref* vai ser colocada no component que vai ser controlada imperativamente.
+ */
+export const Input = forwardRef(InputBase);
