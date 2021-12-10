@@ -22,7 +22,7 @@ export function makeServer() {
         email() {
           return faker.internet.email().toLowerCase();
         },
-        createAt() {
+        createdAt() {
           return faker.date.recent(10);
         },
       }),
@@ -30,7 +30,7 @@ export function makeServer() {
 
     seeds(server) {
       // executa a determinada factory
-      server.createList("user", 200);
+      server.createList("user", 10);
     },
 
     routes() {

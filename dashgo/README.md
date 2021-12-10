@@ -152,3 +152,7 @@ const FormInput = forwardRef(InputBase);
     return data;
   });
   ```
+
+  - usa a estratégia comum da web: Stale While Revalidate
+    - obsoleto enquanto revalida
+    - quando sai da página e volta, o ReactQuery exibe os dados em cache, mas ainda faz a requisição para ver se tem algo novo.
