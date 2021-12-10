@@ -139,3 +139,16 @@ const FormInput = forwardRef(InputBase);
 - **ReactQuery**
 
   - Busca, cacheia e atualiza os dados na aplicação, tudo sem 'tocar no estado globals'
+
+  ```ts
+  /**
+   * cache_key (users): chave para acessar o valor no cache
+   * Function: função que vai retornar os valores a serem armazenados no cache
+   */
+  const query = useQuery("users", async () => {
+    const response = await fetch("http://localhost:3000/api/users");
+    const data = await response.json();
+
+    return data;
+  });
+  ```
