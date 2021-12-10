@@ -131,3 +131,11 @@ const FormInput = forwardRef(InputBase);
 
 <FormInput ref={register} />;
 ```
+
+### Data fetching
+
+- busca de dados
+
+- **ReactQuery**
+
+  - Busca, cacheia e atualiza os dados na aplicação, tudo sem 'tocar no estado globals'
