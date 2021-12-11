@@ -146,7 +146,7 @@ const FormInput = forwardRef(InputBase);
    * Function: função que vai retornar os valores a serem armazenados no cache
    */
   const query = useQuery(
-    "users",
+    ["users", page], // vai permitir o refresh dos dados na tela
     async () => {
       const response = await fetch("http://localhost:3000/api/users");
       const data = await response.json();

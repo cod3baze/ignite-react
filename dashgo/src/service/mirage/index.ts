@@ -36,7 +36,7 @@ export function makeServer() {
 
     seeds(server) {
       // executa a determinada factory
-      server.createList("user", 10);
+      server.createList("user", 200);
     },
 
     routes() {

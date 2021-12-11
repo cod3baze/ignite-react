@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Box,
@@ -25,7 +25,9 @@ import Link from "next/link";
 import { useUsers } from "../../hooks/useUsers";
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading, isFetching, error } = useUsers(page);
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -84,33 +86,7 @@ export default function UserList() {
                 </Thead>
 
                 <Tbody>
-                  <Tr>
-                    <Td px={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">elias alexandre</Text>
-                        <Text fontSize="sm" color="gray.300">
-                          eliasallex@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && <Td>04 de Abril, 2021</Td>}
-                    <Td>
-                      <Button
-                        as="a"
-                        size="sm"
-                        fontSize="sm"
-                        colorScheme="purple"
-                        leftIcon={<Icon as={RiPencilLine} fontSize="20" />}
-                      >
-                        {isWideVersion ? "editar" : ""}
-                      </Button>
-                    </Td>
-                  </Tr>
-
-                  {data?.map((user) => (
+                  {data.users?.map((user) => (
                     <Tr key={user.id}>
                       <Td px={["4", "4", "6"]}>
                         <Checkbox colorScheme="pink" />
@@ -141,9 +117,9 @@ export default function UserList() {
               </Table>
 
               <Pagination
-                totalCountOfRegisters={200}
-                currentPage={14}
-                onPageChange={() => {}}
+                totalCountOfRegisters={data.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
               />
             </>
           )}
