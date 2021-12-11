@@ -1,4 +1,10 @@
-import { createServer, Factory, Model } from "miragejs";
+import {
+  createServer,
+  Factory,
+  Model,
+  Response,
+  RestSerializer,
+} from "miragejs";
 import faker from "faker";
 
 type User = {
@@ -37,7 +43,35 @@ export function makeServer() {
       this.namespace = "api";
       this.timing = 750;
 
-      this.get("/users");
+      this.get("/users", function (schema, request) {
+        const { page = 1, per_page = 10 } = request.queryParams;
+
+        const total = schema.all("user").length;
+
+        /**
+         * calcular, quando a página for 2 tem que ter registo
+         * de 10 á 20, page = 3, de 20 á 30...
+         */
+
+        // Índex de onde começa a pegar os dados no DB
+        const pageStart = (Number(page) - 1) * Number(per_page);
+        // Índex de onde termina de pegar os dados no DB
+        const pageEnd = pageStart + Number(per_page);
+
+        // da lista que trazer corta com base no start-end
+        const users = this.serialize(schema.all("user")).users.slice(
+          pageStart,
+          pageEnd
+        );
+
+        return new Response(
+          200,
+          {
+            "x-total-count": String(total),
+          },
+          { users }
+        );
+      });
       this.post("/users");
 
       this.namespace = "";
