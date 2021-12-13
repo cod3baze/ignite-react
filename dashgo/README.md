@@ -160,5 +160,18 @@ const FormInput = forwardRef(InputBase);
   ```
 
   - usa a estratégia comum da web: Stale While Revalidate
+
     - obsoleto enquanto revalida
     - quando sai da página e volta, o ReactQuery exibe os dados em cache, mas ainda faz a requisição para ver se tem algo novo.
+
+  - preFetch: busca os dados de maneira antecipada.
+
+  ```ts
+  async function handlePrefetchUser(userId: number) {
+    // recebe as chaves do dados a ser buscado.
+    // igual a função *useQuery*
+    await queryClient.prefetchQuery(["user", userId], async () => {
+      return api.data.users[userId];
+    });
+  }
+  ```
