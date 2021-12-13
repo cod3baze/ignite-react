@@ -1,4 +1,5 @@
 import {
+  ActiveModelSerializer,
   createServer,
   Factory,
   Model,
@@ -15,6 +16,13 @@ type User = {
 
 export function makeServer() {
   const server = createServer({
+    /**
+     * como o mirage deve interpretar os dados enviados
+     */
+    serializers: {
+      application: ActiveModelSerializer,
+    },
+
     models: {
       user: Model.extend<Partial<User>>({}),
     },

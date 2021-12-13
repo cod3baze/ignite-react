@@ -175,3 +175,31 @@ const FormInput = forwardRef(InputBase);
     });
   }
   ```
+
+  - mutations: permite criar alterar e deletar..
+
+  ```ts
+  /*
+    dessa forma permite monitorar o estado da requisição
+  */
+  const createUser = useMutation(async ((user: CreateUserFormData) => {
+    const response = api.post("/users", {
+      user: {
+        ...user
+      }
+    })
+
+    return response
+  }, {
+    onSuccess: (data, variables) => {
+      // invalida uma ou mais queries
+      // para recarregar a lista de queries atualizada
+      queryClient.invalidateQueries('users')
+
+    // altera os dados do usuário no cache com determinada chave
+      queryClient.setQueryData(['users', {id: variables.id}], data)
+    }
+  });
+
+  await createUser.mutateAsync(values) // executa a função *createUser* de forma assíncrona
+  ```
