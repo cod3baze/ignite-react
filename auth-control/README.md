@@ -60,3 +60,68 @@
     }
   );
   ```
+
+- evitar error de requisições com token expired.
+
+> sempre que o interceptor detectar que está sendo feito request com o token expired, ele vai _pausar_ as requests, até o token ser atualizado. depois vai ter que executar as requests pausadas, adicionando ás o token atualizado.
+
+- ex:
+
+```ts
+if (!isRefreshing) {
+  isRefreshing = true; // só vai atualizar 1 vez, até desatualizar dnv.
+
+  api
+    .post("/refresh", {
+      refreshToken,
+    })
+    .then((response) => {
+      const { token } = response.data;
+
+      setCookie(undefined, "nextauth.token", token, {
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        path: "/",
+      });
+      setCookie(
+        undefined,
+        "nextauth.refresh_token",
+        response.data.refreshToken,
+        {
+          maxAge: 60 * 60 * 24 * 30,
+          path: "/",
+        }
+      );
+
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+      // chama novamente as request que deram error por causa do token
+      failedRequestsQueue.forEach((request) => request.onSuccess(token));
+      failedRequestsQueue = [];
+
+      // parâmetros para fazer a request de novo
+      const originalConfig = error.config;
+    });
+}
+/*
+  dentro do interceptors o axios só permite executar *async/await* com a class *Promise*.
+
+  vamos add 2 funções na fila.
+
+  1 - vai refazer o refresh token, com os parâmetros originais: originalConfig.
+
+  2 - executa se acontecer algum erro na request de refresh token.
+*/
+return new Promise((resolve, reject) => {
+  failedRequestsQueue.push({
+    // caso o token seja atualizado, vai adicionar o novo token para cada função da FailedQueue.
+    onSuccess: (token: string) => {
+      originalConfig.headers["Authorization"] = `Bearer ${token}`;
+
+      resolve(api(originalConfig)); // executa a {api(originalConfig)}. aguardando o código
+    },
+    onFailure: (error: AxiosError) => {
+      reject(error);
+    },
+  });
+});
+```
