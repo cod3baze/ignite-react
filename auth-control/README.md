@@ -125,3 +125,44 @@ return new Promise((resolve, reject) => {
   });
 });
 ```
+
+### HOC
+
+> função de ordem superior: função que pode receber uma função e executar essa função.
+
+ex:
+
+```ts
+/*
+  retorna uma função que vai ser passada no SSR.
+*/
+export function withSSRGuest(fn: GetServerSideProps) {
+  return async (context: GetServerSidePropsContext) => {
+    const cookies = parseCookies(context);
+
+    if (cookies["nextauth.token"]) {
+      return {
+        redirect: {
+          destination: "/dashboard",
+          permanent: false,
+        },
+      };
+    }
+
+    // executa a função recebida como argumento
+    return await fn(context);
+  };
+}
+
+/*
+  getServerSideProps: espera como retorno uma função que vai ser executada no SSR.
+*/
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async (context) => {
+    return {
+      props: {},
+    };
+  }
+);
+```
