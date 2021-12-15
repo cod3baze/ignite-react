@@ -20,4 +20,7 @@
     maxAge: 60 * 60 * 24 * 30, // 1month
     path: "/", // todos endereços
   });
+
+  // atualiza o headers de auth que foi setado na configuração do axios
+  api.defaults.headers["Authorization"] = `Bearer ${token}`;
   ```

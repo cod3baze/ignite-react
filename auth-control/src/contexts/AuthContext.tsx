@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { setCookie } from "nookies";
+import { createContext, useContext, useEffect, useState } from "react";
+import { parseCookies, setCookie } from "nookies";
 import Router from "next/router";
 
 import { api } from "../services/api";
@@ -55,11 +55,25 @@ export const AuthContextProvider = ({ children }: IAuthProvider) => {
         roles,
       });
 
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+
       Router.push("/dashboard");
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   }
+
+  useEffect(() => {
+    const { "nextauth.token": token } = parseCookies();
+
+    if (token) {
+      api.get("/me").then((response) => {
+        const { email, permissions, roles } = response.data;
+
+        setUser({ email, permissions, roles });
+      });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, user }}>
