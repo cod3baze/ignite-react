@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useCan } from "../hooks/useCan";
 import { setupAPIClient } from "../services/api";
 import { api } from "../services/apiClient";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
   const { user } = useAuthContext();
+
+  const userCanSeeMetrics = useCan({
+    roles: ["administrator"],
+  });
 
   useEffect(() => {
     api
@@ -17,6 +22,12 @@ export default function Dashboard() {
   return (
     <div>
       <h1>bem vindo, {user?.email}</h1>
+
+      {userCanSeeMetrics && (
+        <div>
+          <h4>metrics: true</h4>
+        </div>
+      )}
     </div>
   );
 }
