@@ -4,7 +4,7 @@ import Router from "next/router";
 
 import { api } from "../services/apiClient";
 
-type User = {
+export type User = {
   email: string;
   permissions: string[];
   roles: string[]; // cargos
