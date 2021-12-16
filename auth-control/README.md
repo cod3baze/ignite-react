@@ -101,6 +101,14 @@ if (!isRefreshing) {
       // parâmetros para fazer a request de novo
       const originalConfig = error.config;
     });
+
+  // LogOut the user only if is running on Browser.
+  if (process.browser) {
+    signOut();
+  } else {
+    // lança um error com a instancia: AuthTokenError
+    return Promise.reject(new AuthTokenError());
+  }
 }
 /*
   dentro do interceptors o axios só permite executar *async/await* com a class *Promise*.
