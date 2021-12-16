@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { parseCookies, setCookie } from "nookies";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import Router from "next/router";
 
-import { api, signOut } from "../services/api";
+import { api } from "../services/apiClient";
 
 type User = {
   email: string;
@@ -26,6 +26,13 @@ interface IAuthProvider {
 }
 
 const AuthContext = createContext({} as IAuthContextDataType);
+
+export function signOut() {
+  destroyCookie(undefined, "nextauth.token");
+  destroyCookie(undefined, "nextauth.refresh_token");
+
+  Router.push("/");
+}
 
 export const AuthContextProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<User>();

@@ -3,8 +3,6 @@ import { useState, FormEvent } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useAuthContext } from "../contexts/AuthContext";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
 import { withSSRGuest } from "../utils/withSSRGuest";
 
 export default function Home() {
