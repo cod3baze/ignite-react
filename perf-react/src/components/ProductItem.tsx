@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 type ProductItemProps = {
-  product: { id: number; price: number; title: string };
+  product: { id: number; price: number; title: string; priceFormatted: number };
   onAddToWishList: (id: number) => void;
 };
 
@@ -11,7 +11,7 @@ export function ProductItemComponent({
 }: ProductItemProps) {
   return (
     <div>
-      {product.title} - {product.price}
+      {product.title} - {product.priceFormatted}
       <button
         style={{ marginLeft: 10 }}
         type="button"
