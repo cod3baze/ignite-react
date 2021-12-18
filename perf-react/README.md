@@ -107,3 +107,36 @@
     }
   }
   ```
+
+## code splitting
+
+- dynamic import: importar algum component/funcionalidade somente quando for usar ele.
+
+  - ex:
+
+  ```tsx
+  import { IAddProductToWishlistProps } from "./AddProductToWishlist";
+
+  const AddProductToWishlist = dynamic<IAddProductToWishlistProps>(
+    async () => {
+      return import("./AddProductToWishlist").then(
+        (module) => module.AddProductToWishlist
+      );
+    },
+    {
+      loading: () => <span>Carregando...</span>, // callback
+    }
+  );
+
+  /*
+   * AddProductToWishlist: só vai ser importado no bundle/build.js quando necessário
+   */
+
+  // com funções:
+
+  async function showFormattedDate(date: Date) {
+    const { format } = await import("date-fns");
+
+    format(date);
+  }
+  ```
