@@ -140,3 +140,8 @@
     format(date);
   }
   ```
+
+## virtualização
+
+- permite que o html só mostre items que estão visíveis no browser.
+  - ex: lista de 1000 items, só vai exibir os conteúdos em tela, em vez de todos items. `yarn add react-virtualized`
