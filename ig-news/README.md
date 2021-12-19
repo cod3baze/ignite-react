@@ -1,5 +1,23 @@
 # ig.news
 
+## Frontend tests
+
+> garantem confiança para dar manuntenção no futuro.
+
+- **teste unitário**: garante que uma parte específica do código está funcionando.
+
+  - testa um único component. ex: Um botão.
+
+- **teste de integração**: testa se duas ou mais funcionalidades funcionam juntas.
+
+  - testa se ao adicionar um user ele aparece na listagem. ex: Listagem de users | Adicionar user.
+
+- **teste E2E**: testa a maneira que o user customa utilizar a aplicação.
+
+  - como se fosse um roteiro. ex: Acessar página de login, digitar credentials > verificar se foi redirecionado ao dashboard.
+
+- libs: `jest jest-dom @testing-library/jest-dom @testing-library/dom @testing-library/react babel-jest -D`
+
 ## Prismic CMS
 
 > painel de administração pra poder cadastrar infos, e servir esses dados através de uma API.
