@@ -12,7 +12,8 @@ describe("Asynchronous component", () => {
 
     expect(screen.getByText("hello world")).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(screen.queryByText("Button"));
+    // same: waitFor
+    // await waitForElementToBeRemoved(screen.queryByText("Button"));
 
     await waitFor(() => {
       return expect(screen.getByText("Button")).toBeInTheDocument();
