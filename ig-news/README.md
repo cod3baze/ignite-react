@@ -75,7 +75,26 @@ import "@testing-libary/jest-dom/extend-expect";
   });
   ```
 
+  ```tsx
+  jest.mock("next-auth/client");
+
+  it("renders correctly when users is NOT authenticated", () => {
+    const useSessionMocked = mocked(useSession);
+
+    // a próxima vez que a função *useSession* for chamada vai retornar [null, false]
+    useSessionMocked.mockReturnValue([null, false]);
+    // vai mockar apenas o primeiro retorno.
+    useSessionMocked.mockReturnValueOnce([null, false]);
+
+    render(<SignInButton />);
+
+    expect(screen.getByText("Sign in with github")).toBeInTheDocument();
+  });
+  ```
+
 - `identity-obj-proxy`: lib que identifica arquivos _css_ dentro dos tests no next
+
+- `ts-jest`: lib que integra _jest_ ao **typescript**
 
 ## Prismic CMS
 
