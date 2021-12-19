@@ -31,6 +31,11 @@ module.exports = {
   },
   // ambiente de execução dos tests
   testEnvironment: "jsdom",
+  ,
+  moduleNameMapper: {
+    // converte os styles
+    "\\.(scss|css|sass)$": "identity-obj-proxy",
+  },
 };
 
 setupTests.ts;
@@ -69,6 +74,8 @@ import "@testing-libary/jest-dom/extend-expect";
     debug();
   });
   ```
+
+- `identity-obj-proxy`: lib que identifica arquivos _css_ dentro dos tests no next
 
 ## Prismic CMS
 
