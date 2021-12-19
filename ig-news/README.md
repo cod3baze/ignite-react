@@ -18,6 +18,26 @@
 
 - libs: `jest jest-dom @testing-library/jest-dom @testing-library/dom @testing-library/react babel-jest -D`
 
+- jest config
+
+```js
+module.exports = {
+  testIgnorePatterns: ["/node_module/", "/.next/"],
+  // arquivos que vao ser executados antes de rodar os tests
+  setupFilesAfterEnv: ["<rootDir>/src/tests/setupTests.ts"],
+  // transforma o código antes de executar: .ts para .js
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+  },
+  // ambiente de execução dos tests
+  testEnvironment: "jsdom",
+};
+
+setupTests.ts;
+// trás funcionalidades para que o jest trabalhe com a DOM
+import "@testing-libary/jest-dom/extend-expect";
+```
+
 ## Prismic CMS
 
 > painel de administração pra poder cadastrar infos, e servir esses dados através de uma API.
