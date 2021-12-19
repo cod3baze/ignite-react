@@ -22,7 +22,7 @@
 
 ```js
 module.exports = {
-  testIgnorePatterns: ["/node_module/", "/.next/"],
+  testPathIgnorePatterns: ["/node_module/", "/.next/"],
   // arquivos que vao ser executados antes de rodar os tests
   setupFilesAfterEnv: ["<rootDir>/src/tests/setupTests.ts"],
   // transforma o código antes de executar: .ts para .js
@@ -37,6 +37,38 @@ setupTests.ts;
 // trás funcionalidades para que o jest trabalhe com a DOM
 import "@testing-libary/jest-dom/extend-expect";
 ```
+
+- Mocks: camadas fakes que adicionam uma funcionalidade na aplicação.
+
+  - imitações fictícias.
+  - ex: sempre que precisarmos testar um component que usa uma funcionalidade externa, o mock adiciona essa função.
+
+  ex:
+
+  ```tsx
+  /*
+    toda vez que o teste/component importar a lib *next/router*, ela vai retornar o *<return>*
+  */
+  jest.mock("next/router", () => {
+    return {
+      useRouter() {
+        return {
+          asPath: "/",
+        };
+      },
+    };
+  });
+
+  test("ActiveLink renders correctly", () => {
+    const { debug } = render(
+      <ActiveLink href="/" activeClassName="active">
+        <a>Home</a>
+      </ActiveLink>
+    );
+
+    debug();
+  });
+  ```
 
 ## Prismic CMS
 
